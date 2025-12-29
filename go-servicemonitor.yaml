@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: go-highload
+  namespace: monitoring
+  labels:
+    release: mon
+spec:
+  selector:
+    matchLabels:
+      app: go-highload
+  namespaceSelector:
+    matchNames:
+      - default
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s
